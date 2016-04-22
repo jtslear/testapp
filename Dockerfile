@@ -3,6 +3,6 @@ FROM scratch
 EXPOSE 8000
 
 ADD VERSION /
-ADD main /
+ADD main.up /
 
-CMD ["/main"]
+CMD ["/main.up"]
