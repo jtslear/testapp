@@ -1,11 +1,12 @@
 #!/bin/bash -ex
 
-VERSION=$(cat VERSION)
+VERSION=11
 
-rm -f main.up
+rm -f testapp
+rm -f testapp.up
 
-CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -a -installsuffix cgo -o main .
-upx -o main.up main
+CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -a -installsuffix cgo -o testapp .
+upx -9 -o testapp.up testapp
 
 docker build -t jtslear/testapp:latest .
 docker tag jtslear/testapp:latest jtslear/testapp:$VERSION
