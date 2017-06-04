@@ -1,15 +1,21 @@
 package main
 
 import (
-	"io"
+	"encoding/json"
 	"net/http"
-	"strconv"
+	"os"
 )
 
 var VERSION int = 11
 
 func Hello(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, strconv.Itoa(VERSION))
+	type Response struct {
+		version int
+		special_var string
+	}
+	var special_var = os.Getenv("SPECIAL_VAR")
+	u := Response{version: VERSION, special_var: special_var}
+	json.NewEncoder(w).Encode(u)
 }
 
 func main() {
