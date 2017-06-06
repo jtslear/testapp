@@ -25,23 +25,23 @@ func TestOutputVersion(t *testing.T) {
 	}
 
 	var HTTPOutput struct {
-		version int
-		special_var string
+		Version int `json:"version"`
+		Special_var string `json:"special_var"`
 	}
 	json.NewDecoder(w.Body).Decode(&HTTPOutput)
 	t.Log("Body: %s", w.Body)
-	t.Log("Version: %d", HTTPOutput.version)
-	t.Log("Special Variable: %s", HTTPOutput.special_var)
+	t.Log("Version: %d", HTTPOutput.Version)
+	t.Log("Special Variable: %s", HTTPOutput.Special_var)
 
-	if HTTPOutput.version != 11 {
-		t.Log("Version is not 11, got", HTTPOutput.version)
+	if HTTPOutput.Version != 11 {
+		t.Log("Version is not 11, got", HTTPOutput.Version)
 		t.Fail()
 	}
 
 	var test_var = "ninety-nine"
 	os.Setenv("SECRET_VAR", test_var)
-	if HTTPOutput.special_var != test_var {
-		t.Logf("Special Var is not %s, got %s", test_var, HTTPOutput.special_var)
+	if HTTPOutput.Special_var != test_var {
+		t.Logf("Special Var is not %s, got %s", test_var, HTTPOutput.Special_var)
 		t.Fail()
 	}
 }
