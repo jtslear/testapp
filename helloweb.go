@@ -13,8 +13,8 @@ func Hello(w http.ResponseWriter, r *http.Request) {
 		Version int `json:"version"`
 		Special_var string `json:"special_var"`
 	}
-	var special_var = os.Getenv("SPECIAL_VAR")
-	u := Response{Version: VERSION, Special_var: special_var}
+	specialVar, _ := os.LookupEnv("SPECIAL_VAR")
+	u := Response{Version: VERSION, Special_var: specialVar}
 	json.NewEncoder(w).Encode(u)
 }
 

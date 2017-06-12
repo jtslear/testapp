@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -10,8 +11,20 @@ import (
 	"testing"
 )
 
+func init() {
+	var secretVar = "SECRET_VAR"
+	var testVar = "ninety-nine"
+	os.Setenv(secretVar, testVar)
+}
+
 func TestOutputVersion(t *testing.T) {
-	t.Logf("Special Var: %s", os.Getenv("SPECIAL_VAR"))
+	var secretVar = "SECRET_VAR"
+	val, ok := os.LookupEnv(secretVar)
+	if !ok {
+		fmt.Printf("%s is not set\n", secretVar)
+	} else {
+		fmt.Printf("%s: %s\n", secretVar, val)
+	}
 	req, _ := http.NewRequest("GET", "", nil)
 	w := httptest.NewRecorder()
 	Hello(w, req)
@@ -42,16 +55,12 @@ func TestOutputVersion(t *testing.T) {
 		t.Fail()
 	}
 
-	var testVar = "ninety-nine"
-	if HTTPOutput.Special_var != testVar {
-		t.Logf("Special Var is not %s, got %s", testVar, HTTPOutput.Special_var)
+	if HTTPOutput.Special_var != val {
+		t.Logf("Special Var is not %s, got %s", val, HTTPOutput.Special_var)
 		t.Fail()
 	}
 }
 
 func TestMain(m *testing.M) {
-	var testVar = "ninety-nine"
-	os.Setenv("SECRET_VAR", testVar)
-
 	os.Exit(m.Run())
 }
