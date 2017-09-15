@@ -11,9 +11,9 @@ import (
 )
 
 func TestOutputVersion(t *testing.T) {
-	req, _ := http.NewRequest("GET", "", nil)
+	req, _ := http.NewRequest("GET", "/version", nil)
 	w := httptest.NewRecorder()
-	Hello(w, req)
+	version(w, req)
 	if w.Code != http.StatusOK {
 		t.Errorf("Home page didn't return %v", http.StatusOK)
 	}
@@ -23,11 +23,11 @@ func TestOutputVersion(t *testing.T) {
 		log.Fatal(err)
 	}
 
-	var eleven string = "11"
+	var version string = "12"
 	stringedResult := strings.TrimSpace(string(result))
-	compareOutcome := strings.Compare(eleven, stringedResult)
+	compareOutcome := strings.Compare(version, stringedResult)
 	if compareOutcome != 0 {
-		t.Log("Result is not 11, got", string(result))
+		t.Log("Result is not 12, got", string(result))
 		t.Fail()
 	}
 }

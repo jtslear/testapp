@@ -1,18 +1,25 @@
 package main
 
 import (
-	"io"
+	"fmt"
 	"net/http"
+	"os"
 	"strconv"
 )
 
-var VERSION int = 11
+var VERSION int = 12
 
-func Hello(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, strconv.Itoa(VERSION))
+func version(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, strconv.Itoa(VERSION))
+}
+
+func hello(w http.ResponseWriter, r *http.Request) {
+	hostname, _ := os.Hostname()
+	fmt.Fprintf(w, hostname)
 }
 
 func main() {
-	http.HandleFunc("/", Hello)
+	http.HandleFunc("/version", version)
+	http.HandleFunc("/", hello)
 	http.ListenAndServe(":8000", nil)
 }

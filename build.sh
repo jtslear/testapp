@@ -1,6 +1,6 @@
 #!/bin/bash -ex
 
-VERSION=11
+VERSION=12
 
 rm -f testapp
 rm -f testapp.up
