@@ -2,24 +2,14 @@ package main
 
 import (
 	"fmt"
-	"net/http"
-	"os"
-	"strconv"
+	"time"
 )
 
-var VERSION int = 12
-
-func version(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, strconv.Itoa(VERSION))
-}
-
-func hello(w http.ResponseWriter, r *http.Request) {
-	hostname, _ := os.Hostname()
-	fmt.Fprintf(w, hostname)
-}
-
 func main() {
-	http.HandleFunc("/version", version)
-	http.HandleFunc("/", hello)
-	http.ListenAndServe(":8000", nil)
+	fmt.Println("Starting...")
+	for i := 0; i <= 120; i++ {
+		time.Sleep(1 * time.Second)
+		fmt.Printf(".")
+	}
+	fmt.Println("Done.")
 }

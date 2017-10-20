@@ -9,7 +9,6 @@ CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -a -installsuffix cgo -o test
 upx -9 -o testapp.up testapp
 
 docker build -t jtslear/testapp:latest .
-docker tag jtslear/testapp:latest jtslear/testapp:$VERSION
+docker tag jtslear/testapp:latest jtslear/testapp:cron-1
 
-docker push jtslear/testapp:latest
-docker push jtslear/testapp:$VERSION
+docker push jtslear/testapp:cron-1
