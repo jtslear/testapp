@@ -23,7 +23,7 @@ func TestOutputVersion(t *testing.T) {
 		log.Fatal(err)
 	}
 
-	var version string = "13"
+	var version string = "14"
 	stringedResult := strings.TrimSpace(string(result))
 	compareOutcome := strings.Compare(version, stringedResult)
 	if compareOutcome != 0 {

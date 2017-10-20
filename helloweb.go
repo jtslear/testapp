@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-var VERSION int = 13
+var VERSION int = 14
 
 func version(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, strconv.Itoa(VERSION))
