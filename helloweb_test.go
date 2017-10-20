@@ -23,11 +23,11 @@ func TestOutputVersion(t *testing.T) {
 		log.Fatal(err)
 	}
 
-	var version string = "12"
+	var version string = "13"
 	stringedResult := strings.TrimSpace(string(result))
 	compareOutcome := strings.Compare(version, stringedResult)
 	if compareOutcome != 0 {
-		t.Log("Result is not 12, got", string(result))
+		t.Logf("Result is not %s, got %s\n", version, string(result))
 		t.Fail()
 	}
 }
