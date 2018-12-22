@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: testapp
+spec:
+  selector:
+    app: testapp
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8000
