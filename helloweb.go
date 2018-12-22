@@ -7,10 +7,11 @@ import (
 	"strconv"
 )
 
-var VERSION int = 13
+// Version indicates the version of this application
+var Version = 13
 
 func version(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, strconv.Itoa(VERSION))
+	fmt.Fprintf(w, strconv.Itoa(Version))
 }
 
 func hello(w http.ResponseWriter, r *http.Request) {

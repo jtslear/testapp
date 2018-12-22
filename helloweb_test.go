@@ -8,7 +8,18 @@ import (
 	"os"
 	"strings"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
+
+func TestHello(t *testing.T) {
+	req, _ := http.NewRequest("GET", "/", nil)
+	w := httptest.NewRecorder()
+	hello(w, req)
+	if w.Code != http.StatusOK {
+		t.Errorf("Home page didn't return %v", http.StatusOK)
+	}
+}
 
 func TestOutputVersion(t *testing.T) {
 	req, _ := http.NewRequest("GET", "/version", nil)
@@ -23,13 +34,13 @@ func TestOutputVersion(t *testing.T) {
 		log.Fatal(err)
 	}
 
-	var version string = "13"
-	stringedResult := strings.TrimSpace(string(result))
-	compareOutcome := strings.Compare(version, stringedResult)
-	if compareOutcome != 0 {
-		t.Logf("Result is not %s, got %s\n", version, string(result))
-		t.Fail()
-	}
+	sr := strings.TrimSpace(string(result))
+	assert.Equal(
+		t,
+		sr,
+		"13",
+		"Expected %s, got %s\n", sr, "13",
+	)
 }
 
 func TestMain(m *testing.M) {
