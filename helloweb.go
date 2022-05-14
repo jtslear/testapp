@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"strings"
 )
 
 // Version indicates the version of this application
@@ -17,6 +18,9 @@ func version(w http.ResponseWriter, r *http.Request) {
 func hello(w http.ResponseWriter, r *http.Request) {
 	hostname, _ := os.Hostname()
 	fmt.Fprintf(w, hostname)
+	fmt.Printf("---")
+	environment := os.Environ()
+	fmt.Fprintf(w, strings.Join(environment, "\n"))
 }
 
 func main() {
